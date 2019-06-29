@@ -1,2 +1,2 @@
 # POET
-POET - POEM Editor Transplatform version
+POET - **PO**EM **E**ditor **T**ransplatform version
