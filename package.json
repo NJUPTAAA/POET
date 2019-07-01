@@ -1,0 +1,64 @@
+{
+  "name": "poet",
+  "productName": "POET",
+  "version": "1.0.0",
+  "description": "POET is a cross-platform editor for POEM files.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint src --color"
+  },
+  "keywords": [],
+  "author": "zsfsdesign",
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "npm"
+      },
+      "electronWinstallerConfig": {
+        "name": "poet"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "NJUPTAAA",
+        "name": "POET"
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "POET"
+      }
+    }
+  },
+  "dependencies": {
+    "electron-compile": "^6.4.4",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-titlebar-windows": "^3.0.0",
+    "electron-window-state": "^5.0.3",
+    "parse-domain": "^2.1.7",
+    "perfect-scrollbar": "^1.4.0"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "electron-forge": "^5.2.3",
+    "electron-prebuilt-compile": "3.0.2"
+  }
+}
