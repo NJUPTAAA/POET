@@ -51,14 +51,14 @@
     "electron-squirrel-startup": "^1.0.0",
     "electron-titlebar-windows": "^3.0.0",
     "electron-window-state": "^5.0.3",
-    "parse-domain": "^2.1.7",
+    "parse-domain": "^2.3.1",
     "perfect-scrollbar": "^1.4.0"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "electron-forge": "^5.2.3",
+    "electron-forge": "^5.2.4",
     "electron-prebuilt-compile": "3.0.2"
   }
 }
