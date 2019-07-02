@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 import { stringify } from 'querystring';
 const windowStateKeeper = require('electron-window-state');
 const POEM = require('njuptaaa-poem');
@@ -15,13 +15,23 @@ if (require('electron-squirrel-startup')) {
 
 let mainWindow;
 
-ipcMain.on('parse', (event, arg) => {
-    if(arg=="") return ;
-    else {
-        POEM.parse(arg,"auto",(ret)=>{
-            mainWindow.webContents.send('parseComplete', ret);
-        });
-    }
+ipcMain.on('parse', (event) => {
+    dialog.showOpenDialog({ 
+        title: 'Select POEM / Poetry',
+        filters: [
+            {name:'All Files', extensions: ['poem','poetry']},
+            {name:'POEM', extensions: ['poem']},
+            {name:'Poetry', extensions: ['poetry']}
+        ],
+        properties: ['openFile']
+    },(filePaths)=>{
+        if(filePaths){
+            let filePath=filePaths[0];
+            POEM.parse(filePath,"auto",(ret)=>{
+                mainWindow.webContents.send('parseComplete', ret);
+            });
+        }
+    });
 });
 
 const createWindow = () => {

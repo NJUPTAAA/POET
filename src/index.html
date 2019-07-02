@@ -458,7 +458,7 @@
             <div class="logo-container">POET</div>
             <div>
                 <menu-item><i class="MDI plus-circle"></i> New</menu-item>
-                <menu-item><i class="MDI open-in-new"></i> Open</menu-item>
+                <menu-item onclick="parse()"><i class="MDI open-in-new"></i> Open</menu-item>
                 <menu-item disabled><i class="MDI content-save"></i> Save</menu-item>
                 <menu-item disabled><i class="MDI content-save-all"></i> Save as</menu-item>
             </div>
@@ -471,7 +471,7 @@
                 <menu-item><i class="MDI information"></i> About</menu-item>
             </div>
         </side-bar>
-        <main-container>
+        <main-container style="opacity: 0;">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist" style="flex-shrink:0;flex-grow:0;">
                     <a class="nav-item nav-link active" id="nav-general-tab" data-toggle="tab" href="#nav-general"
@@ -486,23 +486,23 @@
                 <div class="tab-pane fade show active" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
                     <paper-card>
                         <div class="form-group">
-                            <label for="general_standard" class="bmd-label-floating">Standard</label>
-                            <input type="text" class="form-control" id="general_standard" disabled value="1.0">
+                            <label for="general_standard">Standard</label>
+                            <input type="text" class="form-control" id="general_standard" disabled>
                             <span class="bmd-help">The standard this POEM use.</span>
                         </div>
                         <div class="form-group">
-                            <label for="general_generator" class="bmd-label-floating">Generator</label>
-                            <input type="text" class="form-control" id="general_generator" disabled value="NOJ">
+                            <label for="general_generator">Generator</label>
+                            <input type="text" class="form-control" id="general_generator" disabled>
                             <span class="bmd-help">The generator of this POEM.</span>
                         </div>
                         <div class="form-group">
-                            <label for="general_url" class="bmd-label-floating">URL</label>
-                            <input type="text" class="form-control" id="general_url" disabled value="https://github.com/ZsgsDesign/NOJ">
+                            <label for="general_url">URL</label>
+                            <input type="text" class="form-control" id="general_url" disabled>
                             <span class="bmd-help">The url of the generator.</span>
                         </div>
                         <div class="form-group">
-                            <label for="general_description" class="bmd-label-floating">Description</label>
-                            <input type="text" class="form-control" id="general_description" value="This is a test A+B problem POEM file.">
+                            <label for="general_description">Description</label>
+                            <input type="text" class="form-control" id="general_description">
                             <span class="bmd-help">The description of this POEM.</span>
                         </div>
                     </paper-card>
@@ -540,12 +540,21 @@
         localStorage.defaultDisplay = "pcnf";
     }
 
-    ipcRenderer.on("parseComplete", (event, message) => {
-        console.log(message);
-    });
+    function parse(){
+        ipcRenderer.send('parse');
+    }
 
     /* Window releated */
     var ipcRenderer = require('electron').ipcRenderer;
+
+    ipcRenderer.on("parseComplete", (event, message) => {
+        console.log(message);
+        $("#general_standard").val(message.standard);
+        $("#general_generator").val(message.generator);
+        $("#general_url").val(message.url);
+        $("#general_description").val(message.description);
+        $("main-container").css("opacity",1);
+    });
 
     ipcRenderer.on("windowStatusChange", (event, message) => {
         if (message == "unmaximize") $(".titlebar").removeClass("fullscreen");
