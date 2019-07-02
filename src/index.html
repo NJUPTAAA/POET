@@ -336,8 +336,13 @@
         menu-item i {
             display: inline-block;
             transform: scale(1.5);
-            color: rgba(0, 0, 0, 0.63) padding-right:0.5rem;
+            color: rgba(0, 0, 0, 0.63);
+            padding-right:0.5rem;
             line-height: 1;
+        }
+
+        menu-item[disabled] {
+            opacity: 0.5;
         }
 
         result-container {
@@ -445,11 +450,12 @@
             <div>
                 <menu-item><i class="MDI plus-circle"></i> New</menu-item>
                 <menu-item><i class="MDI open-in-new"></i> Open</menu-item>
-                <menu-item><i class="MDI content-save"></i> Save</menu-item>
-                <menu-item><i class="MDI content-save-all"></i> Save as</menu-item>
+                <menu-item disabled><i class="MDI content-save"></i> Save</menu-item>
+                <menu-item disabled><i class="MDI content-save-all"></i> Save as</menu-item>
             </div>
             <div>
-                <menu-item><i class="MDI export"></i> Export as Poetry</menu-item>
+                <menu-item disabled><i class="MDI export"></i> Export as Poetry</menu-item>
+                <menu-item disabled><i class="MDI package-up"></i> Publish Wizard</menu-item>
             </div>
             <div>
                 <menu-item><i class="MDI settings"></i> Settings</menu-item>
