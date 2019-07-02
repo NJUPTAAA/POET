@@ -345,7 +345,12 @@
             opacity: 0.5;
         }
 
-        result-container {
+        .form-control:disabled, .form-control[disabled]{
+            background: none;
+            border-bottom: dashed rgba(0,0,0,0.26) 1px;
+        }
+
+        main-container {
             display: flex;
             flex-shrink: 1;
             flex-grow: 1;
@@ -354,17 +359,17 @@
             width: 1rem;
         }
 
-        result-container .nav-tabs .nav-link.active {
+        main-container .nav-tabs .nav-link.active {
             border-color: #dee2e6 #dee2e6 #495057;
         }
 
-        result-container .nav-tabs .nav-link {
+        main-container .nav-tabs .nav-link {
             padding: .6em .8575em;
             margin-bottom: 1rem;
             transition: .2s ease-out .0s;
         }
 
-        result-container .tab-pane {
+        main-container .tab-pane {
             padding: 1rem;
         }
 
@@ -393,6 +398,10 @@
         #pcnf,
         #pdnf {
             word-break: break-all;
+        }
+
+        .bmd-help {
+            display: block;
         }
     </style>
 </head>
@@ -462,7 +471,7 @@
                 <menu-item><i class="MDI information"></i> About</menu-item>
             </div>
         </side-bar>
-        <result-container>
+        <main-container>
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist" style="flex-shrink:0;flex-grow:0;">
                     <a class="nav-item nav-link active" id="nav-general-tab" data-toggle="tab" href="#nav-general"
@@ -474,26 +483,29 @@
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent" style="flex-grow: 1;flex-shrink: 1;overflow-y: auto;">
-                <div class="tab-pane fade show active" id="nav-general" role="tabpanel"
-                    aria-labelledby="nav-general-tab">
-                    <div id="trueTable" class="d-none">
-                        <paper-card>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr id="headerRaw">
-
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tableRaw">
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </paper-card>
-                        <p><strong>PCNF</strong>: <span id="pcnf"></span></p>
-                        <p><strong>PDNF</strong>: <span id="pdnf"></span></p>
-                    </div>
+                <div class="tab-pane fade show active" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
+                    <paper-card>
+                        <div class="form-group">
+                            <label for="general_standard" class="bmd-label-floating">Standard</label>
+                            <input type="text" class="form-control" id="general_standard" disabled value="1.0">
+                            <span class="bmd-help">The standard this POEM use.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="general_generator" class="bmd-label-floating">Generator</label>
+                            <input type="text" class="form-control" id="general_generator" disabled value="NOJ">
+                            <span class="bmd-help">The generator of this POEM.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="general_url" class="bmd-label-floating">URL</label>
+                            <input type="text" class="form-control" id="general_url" disabled value="https://github.com/ZsgsDesign/NOJ">
+                            <span class="bmd-help">The url of the generator.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="general_description" class="bmd-label-floating">Description</label>
+                            <input type="text" class="form-control" id="general_description" value="This is a test A+B problem POEM file.">
+                            <span class="bmd-help">The description of this POEM.</span>
+                        </div>
+                    </paper-card>
                 </div>
                 <div class="tab-pane fade" id="nav-problems" role="tabpanel" aria-labelledby="nav-problems-tab">
                     <img src="./img/gugugu.svg" style="height:10rem;">
@@ -514,7 +526,7 @@
                     </div>
                 </div>
             </div>
-        </result-container>
+        </main-container>
     </div>
 </body>
 <script>
@@ -528,13 +540,9 @@
         localStorage.defaultDisplay = "pcnf";
     }
 
-    if (localStorage.defaultDisplay == "pcnf") {
-        $("#pcnfRadio").attr("checked", true);
-        $("#pdnfRadio").attr("checked", false);
-    } else {
-        $("#pdnfRadio").attr("checked", true);
-        $("#pcnfRadio").attr("checked", false);
-    }
+    ipcRenderer.on("parseComplete", (event, message) => {
+        console.log(message);
+    });
 
     /* Window releated */
     var ipcRenderer = require('electron').ipcRenderer;

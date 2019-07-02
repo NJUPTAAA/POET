@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { stringify } from 'querystring';
 const windowStateKeeper = require('electron-window-state');
+const POEM = require('njuptaaa-poem');
 
 ipcMain.on('windowStatus', (event, arg) => {
     if(arg=="close") app.quit();
@@ -17,7 +18,9 @@ let mainWindow;
 ipcMain.on('parse', (event, arg) => {
     if(arg=="") return ;
     else {
-        return ;
+        POEM.parse(arg,"auto",(ret)=>{
+            mainWindow.webContents.send('parseComplete', ret);
+        });
     }
 });
 
