@@ -391,6 +391,33 @@
             margin-bottom: 2rem;
         }
 
+        problem-set {
+            display: flex;
+            /* padding: 1rem; */
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        problem-set problem-list {
+            display: flex;
+            background: #f6f6f6;
+            width: 15rem;
+            border-right: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 30px;
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+
+        problem-set problem-editor {
+            display: flex;
+            padding:1rem;
+            flex-shrink: 1;
+            flex-grow: 1;
+        }
+
         .d-none {
             display: none;
         }
@@ -402,6 +429,30 @@
 
         .bmd-help {
             display: block;
+        }
+
+        menu-item[onclick]{
+            cursor: pointer;
+            transition: .2s ease-out .0s;
+        }
+
+        menu-item[onclick]:hover{
+            transform: translateX(0.1rem);
+        }
+
+        *{
+            user-select: none;
+        }
+
+        tab-section{
+            transition: .2s ease-out .0s;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .tab-show{
+            pointer-events: auto;
+            opacity: 1;
         }
     </style>
 </head>
@@ -471,61 +522,70 @@
                 <menu-item><i class="MDI information"></i> About</menu-item>
             </div>
         </side-bar>
-        <main-container style="opacity: 0;">
-            <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist" style="flex-shrink:0;flex-grow:0;">
-                    <a class="nav-item nav-link active" id="nav-general-tab" data-toggle="tab" href="#nav-general"
-                        role="tab" aria-controls="nav-general" aria-selected="true">General</a>
-                    <a class="nav-item nav-link" id="nav-problems-tab" data-toggle="tab" href="#nav-problems" role="tab"
-                        aria-controls="nav-problems" aria-selected="false">Problem Sets</a>
-                    <a class="nav-item nav-link" id="nav-advanced-tab" data-toggle="tab" href="#nav-advanced" role="tab"
-                        aria-controls="nav-advanced" aria-selected="false">Advanced</a>
-                </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent" style="flex-grow: 1;flex-shrink: 1;overflow-y: auto;">
-                <div class="tab-pane fade show active" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
-                    <paper-card>
-                        <div class="form-group">
-                            <label for="general_standard">Standard</label>
-                            <input type="text" class="form-control" id="general_standard" disabled>
-                            <span class="bmd-help">The standard this POEM use.</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="general_generator">Generator</label>
-                            <input type="text" class="form-control" id="general_generator" disabled>
-                            <span class="bmd-help">The generator of this POEM.</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="general_url">URL</label>
-                            <input type="text" class="form-control" id="general_url" disabled>
-                            <span class="bmd-help">The url of the generator.</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="general_description">Description</label>
-                            <input type="text" class="form-control" id="general_description">
-                            <span class="bmd-help">The description of this POEM.</span>
-                        </div>
-                    </paper-card>
-                </div>
-                <div class="tab-pane fade" id="nav-problems" role="tabpanel" aria-labelledby="nav-problems-tab">
-                    <img src="./img/gugugu.svg" style="height:10rem;">
-                </div>
-                <div class="tab-pane fade" id="nav-advanced" role="tabpanel" aria-labelledby="nav-advanced-tab">
-                    <p>HTML Override</p>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="defaultDisplay" id="forceHTMLRadio" value="0" checked>
-                            No Override (Default)
-                        </label>
+        <main-container>
+            <tab-section data-tab="problem-editor">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist" style="flex-shrink:0;flex-grow:0;">
+                        <a class="nav-item nav-link active" id="nav-general-tab" data-toggle="tab" href="#nav-general"
+                            role="tab" aria-controls="nav-general" aria-selected="true">General</a>
+                        <a class="nav-item nav-link" id="nav-problems-tab" data-toggle="tab" href="#nav-problems" role="tab"
+                            aria-controls="nav-problems" aria-selected="false">Problem Sets</a>
+                        <a class="nav-item nav-link" id="nav-advanced-tab" data-toggle="tab" href="#nav-advanced" role="tab"
+                            aria-controls="nav-advanced" aria-selected="false">Advanced</a>
                     </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="defaultDisplay" id="forceHTMLRadio" value="1">
-                            Declear this problem uses raw & purified HTML (NOT Recommend)
-                        </label>
+                </nav>
+                <div class="tab-content" id="nav-tabContent" style="flex-grow: 1;flex-shrink: 1;overflow-y: auto;">
+                    <div class="tab-pane fade show active" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
+                        <paper-card>
+                            <div class="form-group">
+                                <label for="general_standard">Standard</label>
+                                <input type="text" class="form-control" id="general_standard" disabled>
+                                <span class="bmd-help">The standard this POEM use.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="general_generator">Generator</label>
+                                <input type="text" class="form-control" id="general_generator" disabled>
+                                <span class="bmd-help">The generator of this POEM.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="general_url">URL</label>
+                                <input type="text" class="form-control" id="general_url" disabled>
+                                <span class="bmd-help">The url of the generator.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="general_description">Description</label>
+                                <input type="text" class="form-control" id="general_description">
+                                <span class="bmd-help">The description of this POEM.</span>
+                            </div>
+                        </paper-card>
+                    </div>
+                    <div class="tab-pane fade" id="nav-problems" role="tabpanel" aria-labelledby="nav-problems-tab">
+                        <problem-set>
+                            <problem-list>
+                                
+                            </problem-list>
+                            <problem-editor>
+
+                            </problem-editor>
+                        </problem-set>
+                    </div>
+                    <div class="tab-pane fade" id="nav-advanced" role="tabpanel" aria-labelledby="nav-advanced-tab">
+                        <p>HTML Override</p>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="defaultDisplay" id="forceHTMLRadio" value="0" checked>
+                                No Override (Default)
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="defaultDisplay" id="forceHTMLRadio" value="1">
+                                Declear this problem uses raw & purified HTML (NOT Recommend)
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </tab-section>
         </main-container>
     </div>
 </body>
@@ -545,7 +605,10 @@
     }
 
     /* Window releated */
-    var ipcRenderer = require('electron').ipcRenderer;
+    const electron = require('electron');
+    const ipcRenderer = electron.ipcRenderer;
+    const remote = electron.remote;
+    const Menu = remote.Menu;
 
     ipcRenderer.on("parseComplete", (event, message) => {
         console.log(message);
@@ -553,8 +616,13 @@
         $("#general_generator").val(message.generator);
         $("#general_url").val(message.url);
         $("#general_description").val(message.description);
-        $("main-container").css("opacity",1);
+        focusTab("problem-editor");
     });
+
+    function focusTab(tabName){
+        $(`tab-section`).removeClass('tab-show');
+        $(`tab-section[data-tab="${tabName}"]`).addClass('tab-show');
+    }
 
     ipcRenderer.on("windowStatusChange", (event, message) => {
         if (message == "unmaximize") $(".titlebar").removeClass("fullscreen");
@@ -580,6 +648,8 @@
     window.addEventListener("load", function () {
         console.log("successfully loaded");
     }, false);
+
+
 </script>
 
 </html>

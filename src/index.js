@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog, Menu } from 'electron';
 import { stringify } from 'querystring';
 const windowStateKeeper = require('electron-window-state');
 const POEM = require('njuptaaa-poem');
@@ -74,6 +74,32 @@ const createWindow = () => {
     mainWindow.once('ready-to-show', () => {
         mainWindow.show();
         mainWindow.webContents.send('windowStatusChange', mainWindow.isMaximized()?'maximize':'unmaximize');
+    });
+
+    const selectionMenu = Menu.buildFromTemplate([
+        {accelerator: 'Ctrl+C', role: 'copy'},
+        {type: 'separator'},
+        {accelerator: 'Ctrl+A', role: 'selectall'},
+    ])
+    
+    const inputMenu = Menu.buildFromTemplate([
+        {accelerator: 'Ctrl+Z', role: 'undo'},
+        {accelerator: 'Ctrl+Y', role: 'redo'},
+        {type: 'separator'},
+        {accelerator: 'Ctrl+X', role: 'cut'},
+        {accelerator: 'Ctrl+C', role: 'copy'},
+        {accelerator: 'Ctrl+V', role: 'paste'},
+        {type: 'separator'},
+        {accelerator: 'Ctrl+A', role: 'selectall'},
+    ])
+    
+    mainWindow.webContents.on('context-menu', (e, props) => {
+        const { selectionText, isEditable } = props;
+        if (isEditable) {
+            inputMenu.popup(mainWindow);
+        } else if (selectionText && selectionText.trim() !== '') {
+            selectionMenu.popup(mainWindow);
+        }
     });
 };
 
