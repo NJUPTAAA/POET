@@ -420,6 +420,14 @@
             cursor: pointer;
         }
 
+        problem-set problem-list > div[data-id="-1"] {
+            opacity: 0.5;
+        }
+        
+        problem-set problem-list > div[data-id="-1"]:hover {
+            opacity: 1;
+        }
+
         problem-set problem-list > div.active {
             background: rgba(3, 169, 244, 0.1);
             border-left: 4px solid #03a9f4;
@@ -589,7 +597,16 @@
                                 <!-- <div data-id="0" onclick="editProb(this)" class="active">A+B Problem</div> -->
                             </problem-list>
                             <problem-editor>
-
+                                <div class="form-group">
+                                    <label for="general_standard">Title</label>
+                                    <input type="text" class="form-control" id="problem_title_">
+                                    <span class="bmd-help">The title of this problem, should be brief.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="general_standard">Type</label>
+                                    <input type="text" class="form-control" id="problem_type_">
+                                    <span class="bmd-help">Type, could be OnlineJudge or VirtualJudge.</span>
+                                </div>
                             </problem-editor>
                         </problem-set>
                     </div>
@@ -641,6 +658,11 @@
         $("#general_url").val(message.url);
         $("#general_description").val(message.description);
         focusTab("problem-editor");
+        var i=0;
+        message.problems.forEach((ele)=>{
+            $('problem-list').append(`<div data-id="${i}" onclick="editProb(this)" ${i==0?'class="active"':''}>${ele.title}</div>`);
+        });
+        $('problem-list').append(`<div data-id="-1" onclick="newProb()"><i class="MDI plus-circle"></i> Add New Problem</div>`);
     });
 
     function focusTab(tabName){
