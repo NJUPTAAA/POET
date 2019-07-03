@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="lib/MDI-WXSS/MDI.css">
     <link rel="stylesheet" href="lib/bootstrap-material-design/bootstrap-material-design.min.css">
     <link rel="stylesheet" href="lib/animate/animate.min.css">
+    <link rel="stylesheet" href="lib/WeMD/wemd-color-scheme.css">
     <link rel="stylesheet" href="fonts/raleway.css">
     <title>POET</title>
     <style>
@@ -397,12 +398,13 @@
             background: #fff;
             border: 1px solid rgba(0, 0, 0, 0.15);
             border-radius: 4px;
-            margin-bottom: 2rem;
+            /* margin-bottom: 2rem; */
             overflow: hidden;
+            height: 100%;
         }
 
         problem-set problem-list {
-            display: flex;
+            display: block;
             background: #f6f6f6;
             width: 15rem;
             border-right: 1px solid rgba(0, 0, 0, 0.15);
@@ -411,8 +413,20 @@
             flex-grow: 0;
         }
 
+        problem-set problem-list > div {
+            padding:1rem;
+            transition: .2s ease-out .0s;
+            border-left: 0px solid #03a9f4;
+            cursor: pointer;
+        }
+
+        problem-set problem-list > div.active {
+            background: rgba(3, 169, 244, 0.1);
+            border-left: 4px solid #03a9f4;
+        }
+
         problem-set problem-editor {
-            display: flex;
+            display: block;
             padding:1rem;
             flex-shrink: 1;
             flex-grow: 1;
@@ -448,6 +462,16 @@
             transition: .2s ease-out .0s;
             pointer-events: none;
             opacity: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #nav-tabContent{
+            flex-grow: 1;
+            flex-shrink: 1;
+            overflow-y: auto;
+            height: 100%;
         }
 
         .tab-show{
@@ -559,10 +583,10 @@
                             </div>
                         </paper-card>
                     </div>
-                    <div class="tab-pane fade" id="nav-problems" role="tabpanel" aria-labelledby="nav-problems-tab">
+                    <div class="tab-pane fade" id="nav-problems" role="tabpanel" aria-labelledby="nav-problems-tab" style="height: 100%;">
                         <problem-set>
                             <problem-list>
-                                
+                                <!-- <div data-id="0" onclick="editProb(this)" class="active">A+B Problem</div> -->
                             </problem-list>
                             <problem-editor>
 
@@ -622,6 +646,12 @@
     function focusTab(tabName){
         $(`tab-section`).removeClass('tab-show');
         $(`tab-section[data-tab="${tabName}"]`).addClass('tab-show');
+    }
+
+    function editProb(ele){
+        $('problem-list > div').removeClass('active');
+        $(ele).addClass('active');
+        console.log($(ele).attr("data-id"));
     }
 
     ipcRenderer.on("windowStatusChange", (event, message) => {
