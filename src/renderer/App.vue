@@ -1,14 +1,21 @@
 <template>
   <div id="app">
-    <div>hello</div>
-    <!-- <router-view></router-view> -->
+    <title-bar />
+    <side-menu />
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'poet',
-  };
+import SideMenu from './views/SideMenu';
+import TitleBar from './views/TitleBar';
+
+export default {
+  name: 'poet',
+  components:{
+    SideMenu,
+    TitleBar
+  }
+};
 </script>
 
 <style>

@@ -1,3 +1,6 @@
 test/unit/coverage/**
 test/unit/*.js
 test/e2e/*.js
+test/**
+old/**
+src/renderer/lib/**

@@ -59,6 +59,10 @@ let rendererConfig = {
         use: ['vue-style-loader', 'css-loader']
       },
       {
+        test: /\.styl$/,
+        use: ['vue-style-loader','stylus-loader']
+      },
+      {
         test: /\.html$/,
         use: 'vue-html-loader'
       },

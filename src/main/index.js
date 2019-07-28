@@ -1,5 +1,5 @@
-import { app, BrowserWindow } from 'electron' // eslint-disable-line
-
+import { app, BrowserWindow,ipcMain, dialog, Menu } from 'electron' // eslint-disable-line
+const windowStateKeeper = require('electron-window-state');
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -18,15 +18,61 @@ function createWindow() {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 563,
+    height: 700,
     useContentSize: true,
     width: 1000,
+    frame:false
+  });
+  let mainWindowState = windowStateKeeper({
+      defaultWidth: 1000,
+      defaultHeight: 800
+  });
+
+  mainWindowState.manage(mainWindow);
+
+  mainWindow.on('maximize', () => {
+      mainWindow.webContents.send('windowStatusChange', 'maximize');
+  });
+
+  mainWindow.on('unmaximize', () => {
+      mainWindow.webContents.send('windowStatusChange', 'unmaximize');
+  });
+
+  mainWindow.on('closed', () => {
+      mainWindow = null;
+  });
+
+  mainWindow.once('ready-to-show', () => {
+      mainWindow.show();
+      mainWindow.webContents.send('windowStatusChange', mainWindow.isMaximized()?'maximize':'unmaximize');
   });
 
   mainWindow.loadURL(winURL);
 
-  mainWindow.on('closed', () => {
-    mainWindow = null;
+  const selectionMenu = Menu.buildFromTemplate([
+      {accelerator: 'Ctrl+C', role: 'copy'},
+      {type: 'separator'},
+      {accelerator: 'Ctrl+A', role: 'selectall'},
+  ])
+
+  const inputMenu = Menu.buildFromTemplate([
+      {accelerator: 'Ctrl+Z', role: 'undo'},
+      {accelerator: 'Ctrl+Y', role: 'redo'},
+      {type: 'separator'},
+      {accelerator: 'Ctrl+X', role: 'cut'},
+      {accelerator: 'Ctrl+C', role: 'copy'},
+      {accelerator: 'Ctrl+V', role: 'paste'},
+      {type: 'separator'},
+      {accelerator: 'Ctrl+A', role: 'selectall'},
+  ])
+
+  mainWindow.webContents.on('context-menu', (e, props) => {
+      const { selectionText, isEditable } = props;
+      if (isEditable) {
+          inputMenu.popup(mainWindow);
+      } else if (selectionText && selectionText.trim() !== '') {
+          selectionMenu.popup(mainWindow);
+      }
   });
 }
 
