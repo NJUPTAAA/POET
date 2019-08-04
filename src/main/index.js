@@ -4,6 +4,9 @@ const windowStateKeeper = require('electron-window-state');
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
+
+const POEM = require('./lib/poem');
+
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
 }
@@ -12,6 +15,34 @@ let mainWindow;
 const winURL = process.env.NODE_ENV === 'development'
   ? 'http://localhost:9080'
   : `file://${__dirname}/index.html`;
+
+
+ipcMain.on('windowStatus', (event, arg) => {
+  if(arg=="close") app.quit();
+  else if(arg=="minimize") mainWindow.minimize();
+  else mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize();
+});
+
+
+ipcMain.on('parse', (event) => {
+  dialog.showOpenDialog({ 
+      title: 'Select POEM / Poetry',
+      filters: [
+          {name:'All Files', extensions: ['poem','poetry']},
+          {name:'POEM', extensions: ['poem']},
+          {name:'Poetry', extensions: ['poetry']}
+      ],
+      properties: ['openFile']
+  },(filePaths)=>{
+      if(filePaths){
+          let filePath=filePaths[0];
+          let filePath=filePaths[0];
+          POEM.parse(filePath,"auto",(ret)=>{
+              mainWindow.webContents.send('parseComplete', ret);
+          });
+      }
+  });
+});
 
 function createWindow() {
   /**

@@ -3,7 +3,7 @@
       <div class="logo-container">POET</div>
       <div>
           <div class="menu-item"><i class="MDI plus-circle"></i> New</div>
-          <div class="menu-item"><i class="MDI open-in-new"></i> Open</div>
+          <div class="menu-item" @click="handleOpen"><i class="MDI open-in-new"></i> Open</div>
           <div class="menu-item" disabled><i class="MDI content-save"></i> Save</div>
           <div class="menu-item" disabled><i class="MDI content-save-all"></i> Save as</div>
       </div>
@@ -21,8 +21,15 @@
 import '../lib/animate/animate.min.css';
 import '../lib/MDI-WXSS/MDI.css';
 
+import {ipcRenderer} from 'electron';
+
 export default {
-  name:'SideMenu'
+  name:'SideMenu',
+  methods:{
+    handleOpen(){
+      ipcRenderer.send('parse');
+    }
+  }
 }
 </script>
 <style>
