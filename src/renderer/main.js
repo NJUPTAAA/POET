@@ -4,6 +4,7 @@ import axios from 'axios';
 import App from './App';
 import router from './router';
 import store from './store';
+
 import './lib/MDI-WXSS/MDI.css';
 import './lib/bootstrap-material-design/bootstrap-material-design.min.css';
 import './lib/animate/animate.min.css';

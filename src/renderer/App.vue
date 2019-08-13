@@ -1,23 +1,32 @@
 <template>
   <div id="app">
     <title-bar />
-    <side-menu />
+    <div style="display:flex">
+      <side-menu />
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
-import SideMenu from './views/SideMenu';
-import TitleBar from './views/TitleBar';
+import SideMenu from './components/SideMenu';
+import TitleBar from './components/TitleBar';
+
 
 export default {
   name: 'poet',
   components:{
     SideMenu,
-    TitleBar
+    TitleBar,
+  },
+  mounted(){
+    console.log(this.$store.state)
   }
 };
 </script>
 
 <style>
-  /* CSS */
+*{
+  user-select: none;
+}
 </style>

@@ -18,8 +18,6 @@
   </div>
 </template>
 <script>
-import '../lib/animate/animate.min.css';
-import '../lib/MDI-WXSS/MDI.css';
 
 import {ipcRenderer} from 'electron';
 
@@ -28,6 +26,11 @@ export default {
   methods:{
     handleOpen(){
       ipcRenderer.send('parse');
+      ipcRenderer.on("parseComplete", (event, message) => {
+        this.$store.dispatch('changeState',message);
+        console.log(message);
+        this.$router.push({name:'problemEditor'});
+    });
     }
   }
 }
@@ -97,5 +100,6 @@ export default {
 
 .menu-item[disabled] {
   opacity: 0.5;
+  cursor: default;
 }
 </style>
