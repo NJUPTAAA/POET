@@ -1,10 +1,4 @@
 const state = {
-    standard:"",
-    generator:"",
-    url:"",
-    description:"",
-    problems:[],
-    isOverride:true
 };
 
 const mutations = {

@@ -37,6 +37,7 @@ ipcMain.on('parse', (event) => {
       if(filePaths){
           let filePath=filePaths[0];
           POEM.parse(filePath,"auto",(ret)=>{
+              console.log(ret);
               mainWindow.webContents.send('parseComplete', ret);
           });
       }

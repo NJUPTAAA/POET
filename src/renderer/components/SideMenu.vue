@@ -4,12 +4,12 @@
       <div>
           <div class="menu-item"><i class="MDI plus-circle"></i> New</div>
           <div class="menu-item" @click="handleOpen"><i class="MDI open-in-new"></i> Open</div>
-          <div class="menu-item" disabled><i class="MDI content-save"></i> Save</div>
-          <div class="menu-item" disabled><i class="MDI content-save-all"></i> Save as</div>
+          <div class="menu-item" :disabled="disabled.save" ><i class="MDI content-save"></i> Save</div>
+          <div class="menu-item" :disabled="disabled.save" ><i class="MDI content-save-all"></i> Save as</div>
       </div>
       <div>
-          <div class="menu-item" disabled><i class="MDI export"></i> Export as Poetry</div>
-          <div class="menu-item" disabled><i class="MDI package-up"></i> Publish Wizard</div>
+          <div class="menu-item" :disabled="disabled.export" ><i class="MDI export"></i> Export as Poetry</div>
+          <div class="menu-item" :disabled="disabled.publish"><i class="MDI package-up"></i> Publish Wizard</div>
       </div>
       <div>
           <div class="menu-item"><i class="MDI settings"></i> Settings</div>
@@ -23,14 +23,26 @@ import {ipcRenderer} from 'electron';
 
 export default {
   name:'SideMenu',
+  data(){
+    return{
+      disabled:{
+        save:true,
+        export:true,
+        publish:true
+      }
+    }
+  },
   methods:{
     handleOpen(){
       ipcRenderer.send('parse');
       ipcRenderer.on("parseComplete", (event, message) => {
         this.$store.dispatch('changeState',message);
-        console.log(message);
         this.$router.push({name:'problemEditor'});
-    });
+        this.disabled.save = false;
+      });
+    },
+    handleSave(){
+      
     }
   }
 }

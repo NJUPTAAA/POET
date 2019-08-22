@@ -20,7 +20,7 @@ export default {
     TitleBar,
   },
   mounted(){
-    console.log(this.$store.state)
+    window.store=this.$store;
   }
 };
 </script>
