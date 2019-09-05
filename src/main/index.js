@@ -5,7 +5,8 @@ const windowStateKeeper = require('electron-window-state');
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
 
-const POEM = require('./lib/poem');
+// const POEM = require('./lib/poem');
+const POEM = require('njuptaaa-poem');
 
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
