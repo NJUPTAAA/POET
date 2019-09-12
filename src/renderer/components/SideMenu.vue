@@ -36,6 +36,7 @@ export default {
     handleOpen(){
       ipcRenderer.send('parse');
       ipcRenderer.on("parseComplete", (event, message) => {
+        console.log(message);
         this.$store.dispatch('changeState',message);
         this.$router.push({name:'problemEditor'});
         this.disabled.save = false;
