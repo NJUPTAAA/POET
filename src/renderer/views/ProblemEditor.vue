@@ -28,6 +28,9 @@
   width: 58%;
   margin-left: auto;
   margin-right: auto;
+  overflow: scroll;
+  height: 98vh;
+  /* height: 100vh; */
 }
 .nav-pills .nav-link, .nav-tabs .nav-link{
   margin: 1.4286em .8575em !important;

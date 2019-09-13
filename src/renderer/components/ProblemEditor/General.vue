@@ -4,30 +4,36 @@
           <div class="form-group">
               <label for="general_standard">Standard</label>
               <input type="text" class="form-control" id="general_standard" v-model="standard"  >
-              <span class="bmd-help">The standard this POEM use.</span>
+              <!-- <span class="bmd-help">The standard this POEM use.</span> -->
           </div>
           <div class="form-group">
               <label for="general_generator">Generator</label>
               <input type="text" class="form-control" id="general_generator" v-model="generator" >
-              <span class="bmd-help">The generator of this POEM.</span>
+              <!-- <span class="bmd-help">The generator of this POEM.</span> -->
           </div>
           <div class="form-group">
               <label for="general_url">URL</label>
               <input type="text" class="form-control" id="general_url" v-model="url" >
-              <span class="bmd-help">The url of the generator.</span>
+              <!-- <span class="bmd-help">The url of the generator.</span> -->
           </div>
           <div class="form-group">
               <label for="general_description">Description</label>
-              <input type="text" class="form-control" id="general_description" v-model="description" >
-              <span class="bmd-help">The description of this POEM.</span>
+              <markdown-editor v-model="description" />
+              <!-- <input type="text" class="form-control" id="general_description" v-model="description" > -->
+              <!-- <span class="bmd-help">The description of this POEM.</span> -->
           </div>
       </div>
   </div>
 </template>
 
 <script>
+import MarkdownEditor from '../common/MarkdownEditor';
+
 export default {
   name:'General',
+  components:{
+    MarkdownEditor
+  },
   computed:{
     standard:{
       get(){
@@ -72,16 +78,16 @@ export default {
 
 
 <style>
-.tab-pane {
+/* .tab-pane {
   padding: 1rem;
-}
+} */
 .paper-card{
   display: block;
   padding: 1rem;
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;
-  margin-bottom: 2rem;
+  /* margin-bottom: 1rem; */
 }
 .bmd-help {
   display: block !important;

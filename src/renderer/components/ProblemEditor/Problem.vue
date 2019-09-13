@@ -6,8 +6,9 @@
         :key="index"
         data-id="index" 
         :class="{active:index === selectedIndex}"
+        @click="selectedIndex = index"
       >{{item.title}}</div>
-      <div data-id="-1" onclick="newProb()"><i class="MDI plus-circle"></i> Add New Problem</div>
+      <div data-id="-1" @click="newProblem"><i class="MDI plus-circle"></i> Add New Problem</div>
     </div>
     <div class="problem-editor">
       <div data-id="0">
@@ -38,6 +39,28 @@ export default {
     problems(){
       return this.$store.state.Problem.problems;
     }
+  },
+  methods:{
+    newProblem(){
+      const tempProblem = {
+        description:"",
+        extra:{},
+        memoryLimit:{},
+        note:"",
+        output:"",
+        require:{},
+        resources:[],
+        sample:[],
+        solution:[],
+        source:{},
+        testCases:[],
+        timeLimit:{},
+        title:"undefined",
+        type:"undefined"
+      };
+      this.$store.dispatch('addProblem',tempProblem);
+    }
+    
   }
 }
 </script>

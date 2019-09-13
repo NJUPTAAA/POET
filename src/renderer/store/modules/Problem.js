@@ -4,6 +4,9 @@ const state = {
 const mutations = {
   HANDLE_CHANGE(state,{key,value}){
     state[key] = value;
+  },
+  ADD_PROBLEM(state, data) {
+    state.problems.push(data);
   }
 };
 
@@ -12,6 +15,9 @@ const actions = {
     for(let key in data){
       commit('HANDLE_CHANGE',{key,value:data[key]});
     }
+  },
+  addProblem({ commit }, data) {
+    commit('ADD_PROBLEM', data);
   }
 };
 

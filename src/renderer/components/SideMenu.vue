@@ -61,8 +61,10 @@ export default {
   letter-spacing: 1rem;
 }
 .side-bar {
+  /* position: fixed; */
   padding-top: 20px;
   display: block;
+  overflow-y: hidden;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 30px;
   border-radius: 0;
   transition: .2s ease-out .0s;
@@ -82,6 +84,7 @@ export default {
   flex-shrink: 0;
   user-select: none;
   height: 100vh;
+  overflow-y: hidden;
 }
 .side-bar:hover {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 40px;
