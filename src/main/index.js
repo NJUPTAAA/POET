@@ -52,7 +52,9 @@ function createWindow() {
     height: 700,
     useContentSize: true,
     width: 1000,
-    frame:false
+    frame: false,
+    minWidth: 700,
+    minHeight:550
   });
   let mainWindowState = windowStateKeeper({
       defaultWidth: 1000,

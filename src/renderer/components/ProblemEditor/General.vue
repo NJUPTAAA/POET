@@ -78,12 +78,9 @@ export default {
 
 
 <style>
-/* .tab-pane {
-  padding: 1rem;
-} */
 .paper-card{
   display: block;
-  padding: 1rem;
+  padding: 20px;
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;

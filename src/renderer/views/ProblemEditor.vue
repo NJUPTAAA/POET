@@ -29,7 +29,7 @@
   margin-left: auto;
   margin-right: auto;
   overflow: scroll;
-  height: 98vh;
+  height: calc(100vh - 40px);
   /* height: 100vh; */
 }
 .nav-pills .nav-link, .nav-tabs .nav-link{

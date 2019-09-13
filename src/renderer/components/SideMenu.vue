@@ -86,6 +86,12 @@ export default {
   height: 100vh;
   overflow-y: hidden;
 }
+@media screen and (max-width: 1300px) {
+  .side-bar{
+    width: 18rem;
+  }
+}
+
 .side-bar:hover {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 40px;
 }
