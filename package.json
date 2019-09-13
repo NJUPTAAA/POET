@@ -53,7 +53,7 @@
     "electron-window-state": "^5.0.3",
     "parse-domain": "^2.3.2",
     "perfect-scrollbar": "^1.4.0",
-    "njuptaaa-poem": "^1.0.0"
+    "njuptaaa-poem": "^1.0.5"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
