@@ -7,17 +7,23 @@ const mutations = {
   },
   ADD_PROBLEM(state, data) {
     state.problems.push(data);
+  },
+  EDIT_PROBLEM(state, { index, key, value }) {
+    state.problems[index][key] = value;
   }
 };
 
 const actions = {
-  changeState({commit,state},data){
+  changeState({ commit, state }, data) {
     for(let key in data){
-      commit('HANDLE_CHANGE',{key,value:data[key]});
+      commit('HANDLE_CHANGE', { key, value: data[key] });
     }
   },
   addProblem({ commit }, data) {
     commit('ADD_PROBLEM', data);
+  },
+  editProblem({ commit }, {index, key, value }) {
+    commit('EDIT_PROBLEM', { index, key, value });
   }
 };
 

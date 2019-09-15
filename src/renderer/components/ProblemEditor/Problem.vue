@@ -5,21 +5,22 @@
         v-for="(item,index) in problems"
         :key="index"
         data-id="index" 
+        v-if="item"
         :class="{active:index === selectedIndex}"
         @click="selectedIndex = index"
       >{{item.title}}</div>
       <div data-id="-1" @click="newProblem"><i class="MDI plus-circle"></i> Add New Problem</div>
     </div>
     <div class="problem-editor">
-      <div data-id="0">
+      <div data-id="0" v-if="problems[selectedIndex]">
           <div class="form-group">
               <label for="problem_title_0">Title</label>
-              <input type="text" class="form-control" id="problem_title_0" :value="problems[selectedIndex].title">
+              <input type="text" class="form-control" id="problem_title_0" :value="problems[selectedIndex].title" @input="handleTitleChange" >
               <span class="bmd-help">The title of this problem, should be brief.</span>
           </div>
           <div class="form-group">
               <label for="problem_type_0">Type</label>
-              <input type="text" class="form-control" id="problem_type_0" :value="problems[selectedIndex].type">
+              <input disabled type="text" class="form-control" id="problem_type_0" :value="problems[selectedIndex].type" @input="handleTypeChange">
               <span class="bmd-help">Type, could be OnlineJudge or VirtualJudge.</span>
           </div>
       </div>
@@ -56,11 +57,16 @@ export default {
         testCases:[],
         timeLimit:{},
         title:"undefined",
-        type:"undefined"
+        type:"OnlineJudge"
       };
       this.$store.dispatch('addProblem',tempProblem);
+    },
+    handleTitleChange(e){
+      this.$store.dispatch('editProblem',{index:this.selectedIndex,key:'title',value:e.target.value});
+    },
+    handleTypeChange(e){
+      this.$store.dispatch('editProblem',{index:this.selectedIndex,key:'type',value:e.target.value});
     }
-    
   }
 }
 </script>

@@ -2,19 +2,19 @@
   <div class="side-bar animated fadeInLeft">
       <div class="logo-container">POET</div>
       <div>
-          <div class="menu-item"><i class="MDI plus-circle"></i> New</div>
+          <div class="menu-item" @click="handleNew" ><i class="MDI plus-circle"></i> New</div>
           <div class="menu-item" @click="handleOpen"><i class="MDI open-in-new"></i> Open</div>
-          <div class="menu-item" :disabled="disabled.save" ><i class="MDI content-save"></i> Save</div>
-          <div class="menu-item" :disabled="disabled.save" ><i class="MDI content-save-all"></i> Save as</div>
+          <div class="menu-item" :disabled="disabled.save" @click="handleSave" ><i class="MDI content-save"></i> Save</div>
+          <div class="menu-item" :disabled="disabled.saveAs" @click="handleSaveAs" ><i class="MDI content-save-all"></i> Save as</div>
       </div>
-      <div>
+      <!-- <div>
           <div class="menu-item" :disabled="disabled.export" ><i class="MDI export"></i> Export as Poetry</div>
           <div class="menu-item" :disabled="disabled.publish"><i class="MDI package-up"></i> Publish Wizard</div>
       </div>
       <div>
           <div class="menu-item"><i class="MDI settings"></i> Settings</div>
           <div class="menu-item"><i class="MDI information"></i> About</div>
-      </div>
+      </div> -->
   </div>
 </template>
 <script>
@@ -28,22 +28,44 @@ export default {
       disabled:{
         save:true,
         export:true,
-        publish:true
+        publish:true,
+        saveAs:true
       }
     }
   },
   methods:{
+    handleNew(){
+      const temp = {
+        standard: "",
+        generator: "",
+        url: "",
+        description: "",
+        problems: []
+      };
+      this.$store.dispatch('changeState',temp);
+      if(this.$route.name !== 'problemEditor'){
+        this.$router.push({name:'problemEditor'});
+      }
+      this.disabled.save = false;
+    },
     handleOpen(){
       ipcRenderer.send('parse');
       ipcRenderer.on("parseComplete", (event, message) => {
-        console.log(message);
         this.$store.dispatch('changeState',message);
-        this.$router.push({name:'problemEditor'});
+        if(this.$route.name !== 'problemEditor'){
+          this.$router.push({name:'problemEditor'});
+        }
         this.disabled.save = false;
+        this.disabled.saveAs = false;
       });
     },
     handleSave(){
-      
+      const {problems,filePath,...general} = this.$store.state.Problem;
+      ipcRenderer.send('save',{general,problems,filePath}); 
+    },
+    handleSaveAs(){
+      const {problems,filePath,...general} = this.$store.state.Problem;
+      ipcRenderer.send('saveAs',{general,problems,filePath});
     }
   }
 }

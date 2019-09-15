@@ -138,12 +138,7 @@
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.7.5.tgz#e19436e7f8e9b4601005d73673b6dc4784ffcc2f"
   integrity sha1-4ZQ25/jptGAQBdc2c7bcR4T/zC8=
 
-"@types/node@^7.0.18":
-  version "7.10.7"
-  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-7.10.7.tgz#8604623912010235185f1166c7a5a9aa7de9fcd8"
-  integrity sha1-hgRiORIBAjUYXxFmx6Wpqn3p/Ng=
-
-"@types/node@^8.0.7":
+"@types/node@^8.0.24", "@types/node@^8.0.7":
   version "8.10.54"
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-8.10.54.tgz#1c88eb253ac1210f1a5876953fb70f7cc4928402"
   integrity sha1-HIjrJTrBIQ8aWHaVP7cPfMSShAI=
@@ -3977,12 +3972,12 @@ electron-window-state@^5.0.3:
     jsonfile "^4.0.0"
     mkdirp "^0.5.1"
 
-electron@1.7.8:
-  version "1.7.8"
-  resolved "https://registry.npm.taobao.org/electron/download/electron-1.7.8.tgz#27b791a6895171a7d52991b99442cdbd10a3539d"
-  integrity sha1-J7eRpolRcafVKZG5lELNvRCjU50=
+electron@^2.0.0:
+  version "2.0.18"
+  resolved "https://registry.npm.taobao.org/electron/download/electron-2.0.18.tgz#52f1b248c3cc013b5a870094de3b6ba5de313a0f"
+  integrity sha1-UvGySMPMATtahwCU3jtrpd4xOg8=
   dependencies:
-    "@types/node" "^7.0.18"
+    "@types/node" "^8.0.24"
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
 
@@ -5848,6 +5843,11 @@ ignore@^3.3.3, ignore@^3.3.5:
   resolved "https://registry.npm.taobao.org/ignore/download/ignore-3.3.10.tgz#0a97fb876986e8081c631160f8f9f389157f0043"
   integrity sha1-Cpf7h2mG6AgcYxFg+PnziRV/AEM=
 
+immediate@~3.0.5:
+  version "3.0.6"
+  resolved "https://registry.npm.taobao.org/immediate/download/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
+  integrity sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=
+
 import-lazy@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/import-lazy/download/import-lazy-2.1.0.tgz#05698e3d45c88e8d7e9d92cb0584e77f096f3e43"
@@ -6618,6 +6618,16 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+jszip@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.npm.taobao.org/jszip/download/jszip-3.2.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjszip%2Fdownload%2Fjszip-3.2.2.tgz#b143816df7e106a9597a94c77493385adca5bd1d"
+  integrity sha1-sUOBbffhBqlZepTHdJM4WtylvR0=
+  dependencies:
+    lie "~3.3.0"
+    pako "~1.0.2"
+    readable-stream "~2.3.6"
+    set-immediate-shim "~1.0.1"
+
 karma-chai@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npm.taobao.org/karma-chai/download/karma-chai-0.1.0.tgz#bee5ad40400517811ae34bb945f762909108b79a"
@@ -6842,6 +6852,13 @@ libqp@1.1.0:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/libqp/download/libqp-1.1.0.tgz#f5e6e06ad74b794fb5b5b66988bf728ef1dedbe8"
   integrity sha1-9ebgatdLeU+1tbZpiL9yjvHe2+g=
+
+lie@~3.3.0:
+  version "3.3.0"
+  resolved "https://registry.npm.taobao.org/lie/download/lie-3.3.0.tgz#dcf82dee545f46074daf200c7c1c5a08e0f40f6a"
+  integrity sha1-3Pgt7lRfRgdNryAMfBxaCOD0D2o=
+  dependencies:
+    immediate "~3.0.5"
 
 load-json-file@^1.0.0:
   version "1.1.0"
@@ -7722,12 +7739,13 @@ nice-try@^1.0.4:
   resolved "https://registry.npm.taobao.org/nice-try/download/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha1-ozeKdpbOfSI+iPybdkvX7xCJ42Y=
 
-njuptaaa-poem@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.npm.taobao.org/njuptaaa-poem/download/njuptaaa-poem-1.0.3.tgz#647bcb673f75c8154f91d79a7364f6a93cb9cd99"
-  integrity sha1-ZHvLZz91yBVPkdeac2T2qTy5zZk=
+njuptaaa-poem@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npm.taobao.org/njuptaaa-poem/download/njuptaaa-poem-1.0.5.tgz#9983f4fe08fab5c023ad6493d0f6c4933251affd"
+  integrity sha1-mYP0/gj6tcAjrWST0PbEkzJRr/0=
   dependencies:
-    unzip "^0.1.11"
+    jszip "^3.2.2"
+    lodash "^4.17.15"
 
 no-case@^2.2.0, no-case@^2.3.2:
   version "2.3.2"
@@ -8343,7 +8361,7 @@ package-json@^6.3.0:
     registry-url "^5.0.0"
     semver "^6.2.0"
 
-pako@^1.0.10, pako@~1.0.5:
+pako@^1.0.10, pako@~1.0.2, pako@~1.0.5:
   version "1.0.10"
   resolved "https://registry.npm.taobao.org/pako/download/pako-1.0.10.tgz#4328badb5086a426aa90f541977d4955da5c9732"
   integrity sha1-Qyi621CGpCaqkPVBl31JVdpclzI=
@@ -9932,6 +9950,11 @@ set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/set-blocking/download/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
   integrity sha1-BF+XgtARrppoA93TgrJDkrPYkPc=
+
+set-immediate-shim@~1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npm.taobao.org/set-immediate-shim/download/set-immediate-shim-1.0.1.tgz#4b2b1b27eb808a9f8dcc481a58e5e56f599f3f61"
+  integrity sha1-SysbJ+uAip+NzEgaWOXlb1mfP2E=
 
 set-value@^2.0.0, set-value@^2.0.1:
   version "2.0.1"

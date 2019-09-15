@@ -37,12 +37,33 @@ ipcMain.on('parse', (event) => {
   },(filePaths)=>{
       if(filePaths){
           let filePath=filePaths[0];
-          POEM.parse(filePath,"auto",(ret)=>{
-              mainWindow.webContents.send('parseComplete', ret);
+        POEM.parse(filePath, "auto", ({parsed}) => {
+              mainWindow.webContents.send('parseComplete', {filePath,...parsed});
           });
       }
   });
 });
+
+ipcMain.on('save', function (event, data) {
+  const { filePath, ...rest } = data;
+  const [pathName, extensionName] = filePath.split('.');
+  POEM.generate(rest, filePath, extensionName);
+})
+
+ipcMain.on('saveAs', function (event, data) {
+  dialog.showSaveDialog({
+    title: 'Save POEM / Poetry',
+    filters: [
+      {name:'POEM', extensions: ['poem']},
+      {name:'Poetry', extensions: ['poetry']}
+    ],
+    properties: ['openFile']
+  }, function (filePath) {
+      const { filePath:originFilePath, ...rest } = data;
+      const [pathName, extensionName] = filePath.split('.');
+      POEM.generate(rest, filePath, extensionName);
+  })
+})
 
 function createWindow() {
   /**

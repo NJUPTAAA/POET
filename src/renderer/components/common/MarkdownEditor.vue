@@ -55,7 +55,6 @@ export default {
   },
   watch:{
     value(val) {
-      console.log(val)
       if (val === this.simplemde.value() && !this.hasChange) return
       this.simplemde.value(val)
     }

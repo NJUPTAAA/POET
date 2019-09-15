@@ -39,40 +39,35 @@ export default {
       get(){
         return this.$store.state.Problem.standard;
       },
-      set(value){
-        this.$store.dispatch('changeState',{key:'standard',value})
+      set(standard){
+        this.$store.dispatch('changeState',{standard})
       }
     },
     generator:{
       get(){
         return this.$store.state.Problem.generator;
       },
-      set(value){
-        this.$store.dispatch('changeState',{key:'generator',value})        
+      set(generator){
+        this.$store.dispatch('changeState',{generator})        
       }
     },
     url:{
       get(){
         return this.$store.state.Problem.url;
       },
-      set(value){
-        this.$store.dispatch('changeState',{key:'url',value})
+      set(url){
+        this.$store.dispatch('changeState',{url})
       }
     },
     description:{ 
       get(){
         return this.$store.state.Problem.description;        
       },
-      set(value){
-        this.$store.dispatch('changeState',{key:'description',value})
+      set(description){
+        this.$store.dispatch('changeState',{description})
       }
     }
   },
-  methods:{
-    handleChange(type,value){
-      console.log(arguments)
-    }
-  }
 }
 </script>
 
