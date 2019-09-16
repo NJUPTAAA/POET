@@ -60,12 +60,12 @@ export default {
       });
     },
     handleSave(){
-      const {problems,filePath,...general} = this.$store.state.Problem;
-      ipcRenderer.send('save',{general,problems,filePath}); 
+      const {problems,filePath,standard,generator,url,description} = this.$store.state.Problem;
+      ipcRenderer.send('save',{general:{standard,generator,url,description},problems,filePath}); 
     },
     handleSaveAs(){
-      const {problems,filePath,...general} = this.$store.state.Problem;
-      ipcRenderer.send('saveAs',{general,problems,filePath});
+      const {problems,filePath,standard,generator,url,description} = this.$store.state.Problem;
+      ipcRenderer.send('saveAs',{general:{standard,generator,url,description},problems,filePath});
     }
   }
 }
