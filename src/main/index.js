@@ -59,9 +59,11 @@ ipcMain.on('saveAs', function (event, data) {
     ],
     properties: ['openFile']
   }, function (filePath) {
-      const { filePath:originFilePath, ...rest } = data;
-      const [pathName, extensionName] = filePath.split('.');
-      POEM.generate(rest, filePath, extensionName);
+      if (filePath) {
+        const { filePath:originFilePath, ...rest } = data;
+        const [pathName, extensionName] = filePath.split('.');
+        POEM.generate(rest, filePath, extensionName);
+      }
   })
 })
 
