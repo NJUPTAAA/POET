@@ -53,13 +53,13 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/poet.icns"
     },
     "win": {
-      "icon": "build/icons/icon.ico"
+      "icon": "build/icons/poet.ico"
     },
     "linux": {
-      "icon": "build/icons"
+      "icon": "build/poet"
     }
   },
   "dependencies": {
