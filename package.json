@@ -51,7 +51,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "electron-titlebar-windows": "^3.0.0",
     "electron-window-state": "^5.0.3",
-    "parse-domain": "^2.3.2",
+    "parse-domain": "^3.0.2",
     "perfect-scrollbar": "^1.4.0",
     "njuptaaa-poem": "^1.0.0"
   },
